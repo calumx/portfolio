@@ -1,0 +1,294 @@
+.frame-content-container {
+  display: grid;
+  width: 100%;
+  align-content: start;
+  animation: frameContentFade 1s;
+  color: white;
+  font-size: 20px;
+  overflow: hidden;
+}
+
+.frame-content-container::-webkit-scrollbar {
+  display: none;
+}
+
+.frame-content-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.frame-text {
+  color: white;
+  width: 70%;
+  align-self: start;
+  justify-self: center;
+  margin-bottom: 3%;
+  text-shadow: none;
+  font-size: 20px;
+}
+
+.frame-text.sm {
+  display: none;
+}
+
+@media screen and (max-width: 490px) {
+  .frame-text {
+    font-size: 16px;
+  }
+
+  .img-links h1 {
+    font-size: 12px;
+  }
+
+  .img-links p {
+    font-size: 12px;
+  }
+}
+
+.img-links {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 33.3% 33.3% 33.3%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.img-links img {
+  height: 165px;
+  width: 240px;
+  object-fit: cover;
+  transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 1320px) {
+  .img-links img {
+    height: 100px;
+    width: 175px;
+  }
+}
+
+@media screen and (max-width: 324px) {
+  .img-links img {
+    height: 70px;
+    width: 135px;
+  }
+
+  .img-links h1 {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 890px) {
+  .img-links {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    width: 100%;
+  }
+
+  .img-links .more-info {
+    margin-top: 2%;
+    margin-left: 0;
+  }
+
+  .frame-text {
+    display: none;
+  }
+
+  .frame-content-container {
+    display: flex;
+    align-items: flex-start;
+    overflow: scroll;
+    justify-content: center;
+  }
+
+  .info-text-expanded {
+    color: white;
+    background-color: rgb(166, 8, 219);
+    box-shadow: 2px 2px 2px black;
+    font-size: 12px;
+    text-align: center;
+    width: 45vw;
+    height: auto;
+    max-height: 36vh;
+    margin-left: 5%;
+    font-family: 'Abel', sans-serif;
+    padding: 4%;
+    margin-bottom: 3%;
+    overflow: scroll;
+  }
+
+  .info-text-expanded h2 {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 583px) {
+  .info-text-expanded {
+    max-height: 26vh;
+    font-size: 10px;
+  }
+
+  .info-text-expanded h2 {
+    font-size: 10px;
+  }
+}
+
+.img-links p {
+  margin-top: 8%;
+  color: white;
+  text-shadow: none;
+  font-size: 18px;
+}
+
+.img-links a {
+  margin-top: 0;
+  margin-bottom: 2%;
+  color: rgb(251, 238, 154);
+  text-shadow: none;
+  font-size: 18px;
+}
+
+a:hover {
+  color: blue;
+}
+
+h1 {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 0px 1px 2px black;
+  cursor: default;
+}
+
+@media screen and (max-width: 640px) {
+  .frame-text {
+    display: none;
+  }
+  .img-links p,
+  .img-links a,
+  .img-links h1 {
+    font-size: 12px;
+  }
+
+  .img-links h1,
+  .img-links a {
+    margin-bottom: 0;
+  }
+
+  .img-links p {
+    margin-bottom: 1%;
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .img-links p,
+  .img-links a,
+  .img-links h1 {
+    font-size: 10px;
+  }
+}
+
+h2 {
+  text-decoration: underline;
+  font-weight: normal;
+  font-size: 20px;
+}
+
+.more-info:hover {
+  cursor: pointer;
+}
+
+.spin-class {
+  transform: rotate(90deg);
+}
+
+.info-text-container {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  width: 85%;
+  height: 30vh;
+  padding-right: 3%;
+  padding-left: 3%;
+  background-color: rgba(255, 192, 203, 0.2);
+  color: white;
+  justify-self: center;
+  font-size: 16px;
+
+  animation: 0.5s infoTextGrow ease-in-out forwards;
+}
+
+.info-text-container::-webkit-scrollbar {
+  display: none;
+}
+
+.info-text-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.info-text-shrink {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  width: 85%;
+  height: 27vh;
+  padding-right: 3%;
+  padding-left: 3%;
+  background-color: rgba(255, 192, 203, 0.2);
+  color: white;
+  justify-self: center;
+  font-size: 16px;
+  animation: 0.5s infoTextShrink ease-in-out forwards;
+}
+
+.info-text-shrink::-webkit-scrollbar {
+  display: none;
+}
+
+.info-text-shrink {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes frameContentFade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes infoTextGrow {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes infoTextShrink {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+.dim > * {
+  opacity: 0.3;
+  transition: all 0.5s ease;
+}
+
+.dim > .bright {
+  opacity: 1;
+}

@@ -1,0 +1,30 @@
+.contact-div {
+  display: flex;
+  flex: 1;
+  color: white;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
+  animation: 1s frameContentFade;
+}
+
+.contact-div p {
+  margin-top: 0;
+}
+
+.contact-div h2 {
+  display: flex;
+  color: #f3afc2;
+  flex-basis: 100%;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+@keyframes frameContentFade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+html,
+body {
+  height: 100%;
+
+  width: 100%;
+  background: url('./assets/images/waves_bg.png');
+  display: grid;
+  box-shadow: inset 0 0 0 1000px rgba(87, 54, 217, 0.8);
+}
+
+.App {
+  text-align: center;
+  font-family: 'Abel', sans-serif;
+  font-weight: 300;
+  margin-top: 1%;
+  transition: all 0.5s ease;
+  display: grid;
+  grid-template-columns: 15% auto 20%;
+  column-gap: 2%;
+  grid-template-rows: 20% 20% 20%;
+  row-gap: 10%;
+  font-size: 24px;
+}
+
+.text-container {
+  grid-column-start: 1;
+  max-width: 100%;
+  text-align: left;
+}
+
+.logo-container {
+  grid-column-start: 3;
+  max-width: 100%;
+}
+
+.app-logos {
+  height: 60px;
+  width: 63px;
+}
+
+@media screen and (max-width: 1145px) {
+  .app-logos {
+    height: 50px;
+    width: 53px;
+  }
+}
+
+@media screen and (max-width: 995px) {
+  .app-logos {
+    height: 40px;
+    width: 43px;
+  }
+}
+
+@media screen and (max-width: 845px) {
+  .app-logos {
+    height: 30px;
+    width: 33px;
+  }
+}
+
+@media screen and (max-width: 695px) {
+  .logo-container {
+    display: none;
+  }
+
+  #main-content {
+    margin-left: 10%;
+  }
+}
+
+.logo-list {
+  list-style: none;
+}
+
+.logo-list li {
+  display: inline;
+  opacity: 0;
+  animation: 300ms ease-out logo-pop forwards;
+}
+
+.logo-list li:nth-child(1) {
+  animation-delay: 1.1s;
+}
+
+.logo-list li:nth-child(2) {
+  animation-delay: 1.2s;
+}
+
+.logo-list li:nth-child(3) {
+  animation-delay: 1.3s;
+}
+
+.logo-list li:nth-child(4) {
+  animation-delay: 1.4s;
+}
+
+.logo-list li:nth-child(5) {
+  animation-delay: 1.5s;
+}
+
+@keyframes logo-pop {
+  0% {
+    opacity: 0;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-150%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.mainText {
+  animation: 0.5s ease slideInFromLeft;
+  color: white;
+  margin-left: 6%;
+  margin-bottom: 0;
+  font-weight: bold;
+  text-shadow: 0px 1px 3px black;
+}
+
+.secondText {
+  animation: 0.5s ease 0.5s forwards slideInFromLeft;
+  color: white;
+  margin-left: 6%;
+  transform: translateX(-150%);
+  margin-top: 0%;
+  text-shadow: 0px 1px 3px black;
+}
+
+.secondText.lg {
+  display: flex;
+}
+
+.secondText.sm {
+  display: none;
+}
+
+@media screen and (max-width: 1056px) {
+  .secondText.sm {
+    display: flex;
+  }
+
+  .App {
+    font-size: 20px;
+  }
+
+  .secondText.lg {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 714px) {
+  .secondText.sm {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 527px) {
+  .App {
+    font-size: 16px;
+  }
+}
+
+.nav-container {
+  grid-column-start: 1;
+  grid-row-start: 2;
+  color: white;
+  font-weight: 300;
+  text-align: left;
+  margin-left: 6%;
+}
+
+.nav-container .sm {
+  display: none;
+}
+
+@media screen and (max-width: 557px) {
+  .nav-container .sm {
+    display: flex;
+  }
+
+  .nav-container .lg {
+    display: none;
+  }
+}
+
+.nav-links {
+  padding-left: 2%;
+}
+
+.nav-links li {
+  list-style: none;
+  opacity: 0;
+
+  animation: 1s ease-out nav-links-enter 1 forwards;
+  text-shadow: 0px 1px 3px black;
+}
+
+.nav-links li:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.nav-links li:nth-child(1) {
+  animation-delay: 1.9s;
+}
+
+.nav-links li:nth-child(2) {
+  animation-delay: 2.3s;
+}
+
+.nav-links li:nth-child(3) {
+  animation-delay: 2.8s;
+}
+
+@keyframes nav-links-enter {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#main-content {
+  margin-top: 2%;
+  height: 90vh;
+  width: 61vw;
+  grid-column-start: 2;
+  grid-row: 1 / -1;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}
+
+.main-content:before {
+  content: ' ';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border: 1px solid black;
+  border-right-width: 0;
+  border-top-width: 0;
+  animation: 1s borderAnimation forwards;
+
+  pointer-events: none;
+}
+
+.main-content:after {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 1px solid rgba(0, 0, 0, 1);
+  border-left-width: 0;
+  border-bottom-width: 0;
+  animation: 1s borderAnimation forwards;
+  pointer-events: none;
+}
+
+@keyframes borderAnimation {
+  0% {
+    height: 0;
+    width: 0;
+  }
+
+  100% {
+    height: 99.8%;
+    width: 99.8%;
+  }
+}

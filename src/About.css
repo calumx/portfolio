@@ -1,0 +1,141 @@
+.about-frame-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  backface-visibility: hidden; /*these additional lines*/
+  -webkit-backface-visibility: hidden; /*stop the animation*/
+  transform: translateZ(0), scale(1, 1); /*from being janky*/
+  -webkit-transform: translateZ(0) scale(1, 1); /*so do not delete*/
+  animation: frameContentFade 0.5s;
+}
+
+.top-container {
+  display: grid;
+  transition: all 1s ease;
+  grid-template-columns: auto auto;
+  align-content: start;
+
+  animation: 1.8s drawLine ease forwards;
+}
+
+@keyframes drawLine {
+  0% {
+    background: linear-gradient(#f3a, #fc2) bottom / 0% 1px no-repeat;
+  }
+  100% {
+    background: linear-gradient(#f3a, #fc2) bottom / 40% 1px no-repeat;
+  }
+}
+
+.about-blurb {
+  display: flex;
+  width: 75%;
+  color: white;
+  font-size: 16px;
+  font-style: italic;
+  align-self: center;
+  margin-left: 4%;
+}
+
+.img-container {
+  margin-right: 8%;
+  margin-top: 8%;
+}
+
+.profile-img {
+  height: 50vh;
+  width: auto;
+  filter: grayscale(100%);
+  transition: all 1s ease;
+
+  box-shadow: 2px 2px 5px black;
+}
+
+.about-text {
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-basis: 100%;
+}
+
+.about-text p {
+  margin-bottom: 0;
+  margin-top: 1%;
+}
+
+.about-text h2 {
+  margin-bottom: 5%;
+  color: #f3afc2;
+}
+
+@media screen and (max-width: 873px) {
+  .about-text {
+    font-size: 16px;
+    transition: all 1s ease;
+  }
+
+  .profile-img {
+    height: 30vh;
+  }
+
+  .top-container {
+    align-content: center;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .about-text,
+  .about-text h2 {
+    font-size: 15px;
+    transition: all 1s ease;
+  }
+
+  .about-blurb {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .about-text {
+    font-size: 14px;
+    transition: all 1s ease;
+  }
+
+  .about-blurb {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .profile-img {
+    height: 25vh;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .about-text,
+  .about-text h2 {
+    font-size: 12px;
+    transition: all 1s ease;
+  }
+
+  .profile-img {
+    height: 20vh;
+  }
+
+  .top-container {
+    align-content: center;
+  }
+}
+
+@keyframes frameContentFade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
