@@ -15,7 +15,7 @@ import choresVid from './assets/videos/chores-vid.webm';
 
 const MyWork = () => {
   const [infoOpened, setInfoOpened] = useState('');
-  const [siteClickedStyle, setSiteClickedStyle] = useState('');
+  const [siteClickedStyle, setSiteClickedStyle] = useState(null);
   const [shouldShrink, toggleShouldShrink] = useState(false);
   const [slideIn, setSlideIn] = useState(true);
   const [slideDirection, setSlideDirection] = useState('down');
@@ -42,14 +42,20 @@ const MyWork = () => {
 
       //FULL-SCREEN HORIZONTAL LOGIC
     } else if (name === 'meaningful') {
-      setSiteClickedStyle({ transformOrigin: 'left top', overflow: 'scroll' });
+      setSiteClickedStyle({
+        transformOrigin: 'left top',
+        overflow: 'scroll',
+      });
     } else if (name === 'foreign') {
       setSiteClickedStyle({
         transformOrigin: 'center top',
         overflow: 'scroll',
       });
     } else {
-      setSiteClickedStyle({ transformOrigin: 'right top', overflow: 'scroll' });
+      setSiteClickedStyle({
+        transformOrigin: 'right top',
+        overflow: 'scroll',
+      });
     }
 
     //FIRST CLICK
@@ -145,6 +151,16 @@ const MyWork = () => {
   }
 
   const target = useRef(null);
+
+  // document.body.onresize = () => {
+  //   if (window.innerWidth > 889) {
+  //     if (showPop) {
+  //       setShowPop(false);
+  //     }
+  //   } else if (!shouldShrink) {
+  //     setShowPop(true);
+  //   }
+  // };
 
   return (
     <div className="frame-content-container">

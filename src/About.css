@@ -15,7 +15,6 @@
   transition: all 1s ease;
   grid-template-columns: auto auto;
   align-content: start;
-
   animation: 1.8s drawLine ease forwards;
 }
 
