@@ -152,16 +152,6 @@ const MyWork = () => {
 
   const target = useRef(null);
 
-  // document.body.onresize = () => {
-  //   if (window.innerWidth > 889) {
-  //     if (showPop) {
-  //       setShowPop(false);
-  //     }
-  //   } else if (!shouldShrink) {
-  //     setShowPop(true);
-  //   }
-  // };
-
   return (
     <div className="frame-content-container">
       <p className="frame-text">
@@ -215,7 +205,11 @@ const MyWork = () => {
           </Popover>
 
           <h1>Meaningful Map</h1>
-          <a href="http:/google.com" target="_blank" rel="noreferrer">
+          <a
+            href="https://github.com/calumx/meaningful-map"
+            target="_blank"
+            rel="noreferrer"
+          >
             Source Code
           </a>
           <p
@@ -280,7 +274,11 @@ const MyWork = () => {
           </Popover>
 
           <h1>Foreign Language Films</h1>
-          <a href="http://google.com" target="_blank" rel="noreferrer">
+          <a
+            href="https://github.com/calumx/foreign-language-films"
+            target="_blank"
+            rel="noreferrer"
+          >
             Source Code
           </a>
 
