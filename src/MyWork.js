@@ -343,7 +343,11 @@ const MyWork = () => {
           </Popover>
 
           <h1>ChoreMaster</h1>
-          <a href="http://google.com" target="_blank" rel="noreferrer">
+          <a
+            href="https://github.com/calumx/choremaster"
+            target="_blank"
+            rel="noreferrer"
+          >
             Source Code
           </a>
           <p
