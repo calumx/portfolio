@@ -1,7 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './MyWork.css';
-import { faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
-import { useState, useRef } from 'react';
+import {
+  faChevronCircleRight,
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
+
+import { useState, useRef, useEffect } from 'react';
 import MoreInfo from './MoreInfo';
 import { Popover, Slide } from '@material-ui/core';
 import { Popover as ReactPopover } from 'react-bootstrap';
@@ -22,6 +27,8 @@ const MyWork = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [vidOpened, setVidOpened] = useState('');
   const [showPop, setShowPop] = useState(false);
+  const [imgLinksContainer, setImgLinksContainer] = useState(null);
+  const [carouselArrow, setCarouselArrow] = useState('right');
 
   const [verticalView, setVerticalView] = useState(
     window.matchMedia('(max-width: 890px)').matches ? true : false
@@ -152,13 +159,138 @@ const MyWork = () => {
 
   const target = useRef(null);
 
+  // const forceImgLinksScroll = () => {
+  //   const imgLinksElement = document.getElementById('img-links');
+  //   if (imgLinksElement.scrollLeft !== imgLinksElement.scrollWidth) {
+  //     imgLinksElement.scrollLeft = imgLinksElement.scrollWidth;
+  //   } else {
+  //     imgLinksElement.scrollLeft = 0;
+  //   }
+  // };
+
+  useEffect(() => {
+    setImgLinksContainer(document.getElementById('img-links'));
+  }, []);
+
+  const scrollImgs = (direction) => {
+    if (direction === 'right') {
+      imgLinksContainer.scrollLeft = imgLinksContainer.scrollWidth;
+      setCarouselArrow('left');
+    } else {
+      console.log('left');
+      imgLinksContainer.scrollLeft = 0;
+      setCarouselArrow('right');
+    }
+  };
+
   return (
     <div className="frame-content-container">
       <p className="frame-text">
         Click each picture to see a demo video, or click the links underneath
         for more information.
       </p>
-      <div className="img-links" id="img-links">
+
+      <FontAwesomeIcon
+        icon={faChevronLeft}
+        size="lg"
+        style={{
+          paddingLeft: '0.5%',
+          position: 'absolute',
+          top: '25%',
+          borderTopLeftRadius: '0',
+          transform: 'translateY(150%)',
+          zIndex: '1',
+          cursor: 'pointer',
+          opacity: carouselArrow === 'left' ? 1 : 0,
+          transition: 'opacity 500ms ease-in-out',
+        }}
+        onClick={() => scrollImgs('left')}
+      />
+
+      <div
+        className="img-links"
+        id="img-links"
+        style={{
+          maskImage:
+            carouselArrow === 'right'
+              ? 'linear-gradient(to right, black 80%, transparent 100%)'
+              : 'linear-gradient(to left, black 80%, transparent 100%)',
+          WebkitMaskImage:
+            carouselArrow === 'right'
+              ? 'linear-gradient(to right, black 80%, transparent 100%)'
+              : 'linear-gradient(to left, black 80%, transparent 100%)',
+        }}
+      >
+        <div className="christmas-films">
+          <img
+            id="meaningful-thumb"
+            alt="meaningful-map-thumbnail"
+            src={meaningfulThumb}
+            onClick={(e) => imgClickHandler(e, 'meaningful')}
+          ></img>
+
+          <Popover
+            open={vidOpened === 'meaningful'}
+            anchorEl={anchorEl}
+            onClose={popoverClose}
+            transitionDuration={{ enter: 700, exit: 400 }}
+            anchorOrigin={
+              verticalView
+                ? {
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                  }
+                : {
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                  }
+            }
+            transformOrigin={
+              verticalView
+                ? {
+                    vertical: 'top',
+                    horizontal: 'center',
+                  }
+                : {
+                    vertical: 'center',
+                    horizontal: 'left',
+                  }
+            }
+          >
+            <video
+              src={meaningfulVid}
+              height={verticalView ? '200px' : '350px'}
+              width="auto"
+              controls
+              autoPlay
+            />
+          </Popover>
+
+          <h1>Meaningful Map</h1>
+          <a
+            href="https://github.com/calumx/meaningful-map"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Source Code
+          </a>
+          <p
+            onClick={() => infoClickHandler('meaningful')}
+            className="more-info"
+            ref={target}
+            id="meaningful"
+          >
+            <FontAwesomeIcon
+              id="meaningful-arrow"
+              icon={faChevronCircleRight}
+              color="lightblue"
+              style={{ marginRight: '2%', transition: 'all 0.2s ease' }}
+              size="xs"
+            />
+            More Info
+          </p>
+        </div>
+
         <div className="meaningful">
           <img
             id="meaningful-thumb"
@@ -399,6 +531,22 @@ const MyWork = () => {
           </Slide>
         </div>
       ) : null}
+
+      <FontAwesomeIcon
+        icon={faChevronRight}
+        size="lg"
+        style={{
+          paddingRight: '0.5%',
+          position: 'absolute',
+          top: '25%',
+          right: '0',
+          transform: 'translateY(150%)',
+          cursor: 'pointer',
+          opacity: carouselArrow === 'right' ? 1 : 0,
+          transition: 'opacity 500ms ease-in-out',
+        }}
+        onClick={() => scrollImgs('right')}
+      />
     </div>
   );
 };
