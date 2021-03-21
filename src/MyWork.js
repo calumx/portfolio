@@ -1,7 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './MyWork.css';
-import { faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
-import { useState, useRef } from 'react';
+import {
+  faChevronCircleRight,
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
+
+import { useState, useRef, useEffect } from 'react';
 import MoreInfo from './MoreInfo';
 import { Popover, Slide } from '@material-ui/core';
 import { Popover as ReactPopover } from 'react-bootstrap';
@@ -9,9 +14,11 @@ import Overlay from 'react-bootstrap/Overlay';
 import meaningfulThumb from './assets/images/meaningful-map-thumbnail.png';
 import foreignThumb from './assets/images/foreign-thumbnail.png';
 import choreThumb from './assets/images/choremaster-thumbnail.png';
+import christmasThumb from './assets/images/christmas-thumbnail.png';
 import meaningfulVid from './assets/videos/meaningful-vid.webm';
 import foreignVid from './assets/videos/foreign-vid.webm';
 import choresVid from './assets/videos/chores-vid.webm';
+import christmasVid from './assets/videos/christmas-vid.webm';
 
 const MyWork = () => {
   const [infoOpened, setInfoOpened] = useState('');
@@ -22,6 +29,8 @@ const MyWork = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [vidOpened, setVidOpened] = useState('');
   const [showPop, setShowPop] = useState(false);
+  const [imgLinksContainer, setImgLinksContainer] = useState(null);
+  const [carousel, setCarousel] = useState('right');
 
   const [verticalView, setVerticalView] = useState(
     window.matchMedia('(max-width: 890px)').matches ? true : false
@@ -41,14 +50,19 @@ const MyWork = () => {
       return;
 
       //FULL-SCREEN HORIZONTAL LOGIC
-    } else if (name === 'meaningful') {
+    } else if (name === 'christmas') {
       setSiteClickedStyle({
         transformOrigin: 'left top',
         overflow: 'scroll',
       });
+    } else if (name === 'meaningful') {
+      setSiteClickedStyle({
+        transformOrigin: carousel === 'left' ? 'left top' : 'center top',
+        overflow: 'scroll',
+      });
     } else if (name === 'foreign') {
       setSiteClickedStyle({
-        transformOrigin: 'center top',
+        transformOrigin: carousel === 'left' ? 'center top' : 'right top',
         overflow: 'scroll',
       });
     } else {
@@ -152,23 +166,68 @@ const MyWork = () => {
 
   const target = useRef(null);
 
+  useEffect(() => {
+    setImgLinksContainer(document.getElementById('img-links'));
+  }, []);
+
+  const scrollImgs = (direction) => {
+    if (direction === 'right') {
+      imgLinksContainer.scrollLeft = imgLinksContainer.scrollWidth;
+      setCarousel('left');
+    } else {
+      imgLinksContainer.scrollLeft = 0;
+      setCarousel('right');
+    }
+  };
+
   return (
     <div className="frame-content-container">
       <p className="frame-text">
         Click each picture to see a demo video, or click the links underneath
         for more information.
       </p>
-      <div className="img-links" id="img-links">
-        <div className="meaningful">
+
+      <FontAwesomeIcon
+        icon={faChevronLeft}
+        size="lg"
+        style={{
+          paddingLeft: '0.5%',
+          position: 'absolute',
+          top: '25%',
+          borderTopLeftRadius: '0',
+          transform: 'translateY(150%)',
+          zIndex: '1',
+          cursor: 'pointer',
+          opacity: carousel === 'left' ? 1 : 0,
+          transition: 'opacity 500ms ease-in-out',
+        }}
+        onClick={() => scrollImgs('left')}
+      />
+
+      <div
+        className="img-links"
+        id="img-links"
+        style={{
+          maskImage:
+            carousel === 'right'
+              ? 'linear-gradient(to right, black 85%, transparent 100%)'
+              : 'linear-gradient(to left, black 85%, transparent 100%)',
+          WebkitMaskImage:
+            carousel === 'right'
+              ? 'linear-gradient(to right, black 85%, transparent 100%)'
+              : 'linear-gradient(to left, black 85%, transparent 100%)',
+        }}
+      >
+        <div className="christmas">
           <img
-            id="meaningful-thumb"
-            alt="meaningful-map-thumbnail"
-            src={meaningfulThumb}
-            onClick={(e) => imgClickHandler(e, 'meaningful')}
+            id="christmas-thumb"
+            alt="christmas-films-thumbnail"
+            src={christmasThumb}
+            onClick={(e) => imgClickHandler(e, 'christmas')}
           ></img>
 
           <Popover
-            open={vidOpened === 'meaningful'}
+            open={vidOpened === 'christmas'}
             anchorEl={anchorEl}
             onClose={popoverClose}
             transitionDuration={{ enter: 700, exit: 400 }}
@@ -192,6 +251,86 @@ const MyWork = () => {
                 : {
                     vertical: 'center',
                     horizontal: 'left',
+                  }
+            }
+          >
+            <video
+              src={christmasVid}
+              height={verticalView ? '200px' : '350px'}
+              width="auto"
+              controls
+              autoPlay
+            />
+          </Popover>
+
+          <h1>Christmas Films Advent Calendar</h1>
+          <a
+            href="https://github.com/calumx/christmas-films"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Source Code
+          </a>
+          <p
+            onClick={() => infoClickHandler('christmas')}
+            className="more-info"
+            ref={target}
+            id="christmas"
+          >
+            <FontAwesomeIcon
+              id="christmas-arrow"
+              icon={faChevronCircleRight}
+              color="lightblue"
+              style={{ marginRight: '2%', transition: 'all 0.2s ease' }}
+              size="xs"
+            />
+            More Info
+          </p>
+        </div>
+
+        <div className="meaningful">
+          <img
+            id="meaningful-thumb"
+            alt="meaningful-map-thumbnail"
+            src={meaningfulThumb}
+            onClick={(e) => imgClickHandler(e, 'meaningful')}
+          ></img>
+
+          <Popover
+            open={vidOpened === 'meaningful'}
+            anchorEl={anchorEl}
+            onClose={popoverClose}
+            transitionDuration={{ enter: 700, exit: 400 }}
+            anchorOrigin={
+              verticalView
+                ? {
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                  }
+                : carousel === 'left'
+                ? {
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                  }
+                : {
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                  }
+            }
+            transformOrigin={
+              verticalView
+                ? {
+                    vertical: 'top',
+                    horizontal: 'center',
+                  }
+                : carousel === 'left'
+                ? {
+                    vertical: 'center',
+                    horizontal: 'left',
+                  }
+                : {
+                    vertical: 'top',
+                    horizontal: 'center',
                   }
             }
           >
@@ -247,9 +386,14 @@ const MyWork = () => {
                     vertical: 'top',
                     horizontal: 'left',
                   }
-                : {
+                : carousel === 'left'
+                ? {
                     vertical: 'bottom',
                     horizontal: 'center',
+                  }
+                : {
+                    vertical: 'bottom',
+                    horizontal: 'left',
                   }
             }
             transformOrigin={
@@ -258,9 +402,14 @@ const MyWork = () => {
                     vertical: 'bottom',
                     horizontal: 'center',
                   }
-                : {
+                : carousel === 'left'
+                ? {
                     vertical: 'top',
                     horizontal: 'center',
+                  }
+                : {
+                    vertical: 'center',
+                    horizontal: 'right',
                   }
             }
           >
@@ -399,6 +548,22 @@ const MyWork = () => {
           </Slide>
         </div>
       ) : null}
+
+      <FontAwesomeIcon
+        icon={faChevronRight}
+        size="lg"
+        style={{
+          paddingRight: '0.5%',
+          position: 'absolute',
+          top: '25%',
+          right: '0',
+          transform: 'translateY(150%)',
+          cursor: 'pointer',
+          opacity: carousel === 'right' ? 1 : 0,
+          transition: 'opacity 500ms ease-in-out',
+        }}
+        onClick={() => scrollImgs('right')}
+      />
     </div>
   );
 };

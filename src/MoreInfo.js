@@ -3,7 +3,18 @@ import './MyWork.css';
 const MoreInfo = (props) => {
   return (
     <div className="info-text-expanded">
-      {props.about === 'meaningful' ? (
+      {props.about === 'christmas' ? (
+        <div id="christmas-info-text">
+          <h2>Stack Used: React/CSS</h2>
+          <p>
+            An advent calendar to suggest a film (and food/drink pairings!)
+            every day in December. I learned a lot about handling large
+            quantities of images and how this affects the user experience, got
+            more comfortable with getting/setting information using the
+            browser's localStorage, and using DevTools to debug a project.
+          </p>
+        </div>
+      ) : props.about === 'meaningful' ? (
         <div id="meaningful-info-text">
           <h2>Stack Used: HTML5/CSS3/JavaScript - all vanilla.</h2>
           <p>

@@ -2,10 +2,11 @@
   display: grid;
   width: 100%;
   align-content: start;
+  justify-content: start;
   animation: frameContentFade 1s;
   color: white;
   font-size: 20px;
-  overflow: hidden;
+  overflow-y: hidden;
 }
 
 .frame-content-container::-webkit-scrollbar {
@@ -48,11 +49,25 @@
 .img-links {
   width: 100%;
   display: grid;
-  justify-content: center;
-  grid-template-columns: 33.3% 33.3% 33.3%;
-  position: relative;
-  overflow: hidden;
+  grid-auto-flow: column;
+  grid-template-columns: auto;
+  grid-gap: 2.9vw;
+  overflow-x: auto;
   transition: all 0.5s ease;
+  scroll-behavior: smooth;
+}
+
+.img-links::after {
+  content: '';
+  padding-right: 0.1rem;
+}
+
+.img-links::before {
+  content: '';
+}
+
+.img-links::-webkit-scrollbar {
+  display: none;
 }
 
 .img-links img {
