@@ -14,9 +14,11 @@ import Overlay from 'react-bootstrap/Overlay';
 import meaningfulThumb from './assets/images/meaningful-map-thumbnail.png';
 import foreignThumb from './assets/images/foreign-thumbnail.png';
 import choreThumb from './assets/images/choremaster-thumbnail.png';
+import christmasThumb from './assets/images/christmas-thumbnail.png';
 import meaningfulVid from './assets/videos/meaningful-vid.webm';
 import foreignVid from './assets/videos/foreign-vid.webm';
 import choresVid from './assets/videos/chores-vid.webm';
+import christmasVid from './assets/videos/christmas-vid.webm';
 
 const MyWork = () => {
   const [infoOpened, setInfoOpened] = useState('');
@@ -28,7 +30,7 @@ const MyWork = () => {
   const [vidOpened, setVidOpened] = useState('');
   const [showPop, setShowPop] = useState(false);
   const [imgLinksContainer, setImgLinksContainer] = useState(null);
-  const [carouselArrow, setCarouselArrow] = useState('right');
+  const [carousel, setCarousel] = useState('right');
 
   const [verticalView, setVerticalView] = useState(
     window.matchMedia('(max-width: 890px)').matches ? true : false
@@ -48,14 +50,19 @@ const MyWork = () => {
       return;
 
       //FULL-SCREEN HORIZONTAL LOGIC
-    } else if (name === 'meaningful') {
+    } else if (name === 'christmas') {
       setSiteClickedStyle({
         transformOrigin: 'left top',
         overflow: 'scroll',
       });
+    } else if (name === 'meaningful') {
+      setSiteClickedStyle({
+        transformOrigin: carousel === 'left' ? 'left top' : 'center top',
+        overflow: 'scroll',
+      });
     } else if (name === 'foreign') {
       setSiteClickedStyle({
-        transformOrigin: 'center top',
+        transformOrigin: carousel === 'left' ? 'center top' : 'right top',
         overflow: 'scroll',
       });
     } else {
@@ -159,15 +166,6 @@ const MyWork = () => {
 
   const target = useRef(null);
 
-  // const forceImgLinksScroll = () => {
-  //   const imgLinksElement = document.getElementById('img-links');
-  //   if (imgLinksElement.scrollLeft !== imgLinksElement.scrollWidth) {
-  //     imgLinksElement.scrollLeft = imgLinksElement.scrollWidth;
-  //   } else {
-  //     imgLinksElement.scrollLeft = 0;
-  //   }
-  // };
-
   useEffect(() => {
     setImgLinksContainer(document.getElementById('img-links'));
   }, []);
@@ -175,11 +173,10 @@ const MyWork = () => {
   const scrollImgs = (direction) => {
     if (direction === 'right') {
       imgLinksContainer.scrollLeft = imgLinksContainer.scrollWidth;
-      setCarouselArrow('left');
+      setCarousel('left');
     } else {
-      console.log('left');
       imgLinksContainer.scrollLeft = 0;
-      setCarouselArrow('right');
+      setCarousel('right');
     }
   };
 
@@ -201,7 +198,7 @@ const MyWork = () => {
           transform: 'translateY(150%)',
           zIndex: '1',
           cursor: 'pointer',
-          opacity: carouselArrow === 'left' ? 1 : 0,
+          opacity: carousel === 'left' ? 1 : 0,
           transition: 'opacity 500ms ease-in-out',
         }}
         onClick={() => scrollImgs('left')}
@@ -212,25 +209,25 @@ const MyWork = () => {
         id="img-links"
         style={{
           maskImage:
-            carouselArrow === 'right'
-              ? 'linear-gradient(to right, black 80%, transparent 100%)'
-              : 'linear-gradient(to left, black 80%, transparent 100%)',
+            carousel === 'right'
+              ? 'linear-gradient(to right, black 85%, transparent 100%)'
+              : 'linear-gradient(to left, black 85%, transparent 100%)',
           WebkitMaskImage:
-            carouselArrow === 'right'
-              ? 'linear-gradient(to right, black 80%, transparent 100%)'
-              : 'linear-gradient(to left, black 80%, transparent 100%)',
+            carousel === 'right'
+              ? 'linear-gradient(to right, black 85%, transparent 100%)'
+              : 'linear-gradient(to left, black 85%, transparent 100%)',
         }}
       >
-        <div className="christmas-films">
+        <div className="christmas">
           <img
-            id="meaningful-thumb"
-            alt="meaningful-map-thumbnail"
-            src={meaningfulThumb}
-            onClick={(e) => imgClickHandler(e, 'meaningful')}
+            id="christmas-thumb"
+            alt="christmas-films-thumbnail"
+            src={christmasThumb}
+            onClick={(e) => imgClickHandler(e, 'christmas')}
           ></img>
 
           <Popover
-            open={vidOpened === 'meaningful'}
+            open={vidOpened === 'christmas'}
             anchorEl={anchorEl}
             onClose={popoverClose}
             transitionDuration={{ enter: 700, exit: 400 }}
@@ -258,7 +255,7 @@ const MyWork = () => {
             }
           >
             <video
-              src={meaningfulVid}
+              src={christmasVid}
               height={verticalView ? '200px' : '350px'}
               width="auto"
               controls
@@ -266,22 +263,22 @@ const MyWork = () => {
             />
           </Popover>
 
-          <h1>Meaningful Map</h1>
+          <h1>Christmas Films Advent Calendar</h1>
           <a
-            href="https://github.com/calumx/meaningful-map"
+            href="https://github.com/calumx/christmas-films"
             target="_blank"
             rel="noreferrer"
           >
             Source Code
           </a>
           <p
-            onClick={() => infoClickHandler('meaningful')}
+            onClick={() => infoClickHandler('christmas')}
             className="more-info"
             ref={target}
-            id="meaningful"
+            id="christmas"
           >
             <FontAwesomeIcon
-              id="meaningful-arrow"
+              id="christmas-arrow"
               icon={faChevronCircleRight}
               color="lightblue"
               style={{ marginRight: '2%', transition: 'all 0.2s ease' }}
@@ -310,9 +307,14 @@ const MyWork = () => {
                     vertical: 'bottom',
                     horizontal: 'center',
                   }
-                : {
+                : carousel === 'left'
+                ? {
                     vertical: 'bottom',
                     horizontal: 'right',
+                  }
+                : {
+                    vertical: 'bottom',
+                    horizontal: 'center',
                   }
             }
             transformOrigin={
@@ -321,9 +323,14 @@ const MyWork = () => {
                     vertical: 'top',
                     horizontal: 'center',
                   }
-                : {
+                : carousel === 'left'
+                ? {
                     vertical: 'center',
                     horizontal: 'left',
+                  }
+                : {
+                    vertical: 'top',
+                    horizontal: 'center',
                   }
             }
           >
@@ -379,9 +386,14 @@ const MyWork = () => {
                     vertical: 'top',
                     horizontal: 'left',
                   }
-                : {
+                : carousel === 'left'
+                ? {
                     vertical: 'bottom',
                     horizontal: 'center',
+                  }
+                : {
+                    vertical: 'bottom',
+                    horizontal: 'left',
                   }
             }
             transformOrigin={
@@ -390,9 +402,14 @@ const MyWork = () => {
                     vertical: 'bottom',
                     horizontal: 'center',
                   }
-                : {
+                : carousel === 'left'
+                ? {
                     vertical: 'top',
                     horizontal: 'center',
+                  }
+                : {
+                    vertical: 'center',
+                    horizontal: 'right',
                   }
             }
           >
@@ -542,7 +559,7 @@ const MyWork = () => {
           right: '0',
           transform: 'translateY(150%)',
           cursor: 'pointer',
-          opacity: carouselArrow === 'right' ? 1 : 0,
+          opacity: carousel === 'right' ? 1 : 0,
           transition: 'opacity 500ms ease-in-out',
         }}
         onClick={() => scrollImgs('right')}

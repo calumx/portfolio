@@ -49,8 +49,6 @@
 .img-links {
   width: 100%;
   display: grid;
-  /* justify-content: center; */
-  /* grid-template-columns: 33.3% 33.3% 33.3%; */
   grid-auto-flow: column;
   grid-template-columns: auto;
   grid-gap: 2.9vw;
