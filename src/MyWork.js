@@ -199,6 +199,7 @@ const MyWork = () => {
           zIndex: '1',
           cursor: 'pointer',
           opacity: carousel === 'left' ? 1 : 0,
+          visibility: verticalView ? 'hidden' : 'visible',
           transition: 'opacity 500ms ease-in-out',
         }}
         onClick={() => scrollImgs('left')}
@@ -560,6 +561,7 @@ const MyWork = () => {
           transform: 'translateY(150%)',
           cursor: 'pointer',
           opacity: carousel === 'right' ? 1 : 0,
+          visibility: verticalView ? 'hidden' : 'visible',
           transition: 'opacity 500ms ease-in-out',
         }}
         onClick={() => scrollImgs('right')}
