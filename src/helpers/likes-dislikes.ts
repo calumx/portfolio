@@ -1,0 +1,46 @@
+const data = [
+  {
+    id: 1,
+    category: 'likes',
+    subcategory: 'films',
+    title: 'David Lynch',
+    desc: 'Especially Twin Peaks S3, Mulholland Drive, and that video about people watching films on their phones.',
+  },
+  {
+    id: 2,
+    category: 'likes',
+    subcategory: 'films',
+    title: 'John Hughes',
+    desc: 'Even though he had nothing to do with Cool Runnings, if you can believe that.',
+  },
+  {
+    id: 3,
+    category: 'likes',
+    subcategory: 'films',
+    title: 'John Carpenter',
+    desc: "Legend of cinema turned legend of synthesizers. What's not to like?",
+  },
+  { id: 4, category: 'likes', subcategory: 'music', title: 'Judee Sill', desc: 'Self-titled over Heart Food. Just.' },
+  { id: 5, category: 'likes', subcategory: 'music', title: 'Beach Boys', desc: 'Even Kokomo (but not Smart Girls).' },
+  { id: 6, category: 'likes', subcategory: 'music', title: 'Bon Iver', desc: 'But really, I mean Sean Carey.' },
+  { id: 7, category: 'likes', subcategory: 'food', title: 'Starbar', desc: 'Close second: Boost.' },
+  { id: 8, category: 'likes', subcategory: 'food', title: 'Tattie Scones', desc: 'Soft roll, no sauce.' },
+  { id: 9, category: 'likes', subcategory: 'food', title: 'Valdeón', desc: 'My favourite of the cave-aged foods.' },
+  { id: 10, category: 'dislikes', subcategory: 'films', title: 'Happy Madison Productions', desc: 'See "Paul Blart: Mall Cop 2".' },
+  { id: 11, category: 'dislikes', subcategory: 'films', title: 'Marvel', desc: 'ChatGPT, write me a film with a big fight in it.' },
+  {
+    id: 12,
+    category: 'dislikes',
+    subcategory: 'films',
+    title: 'David Gordon Green & Danny McBride',
+    desc: 'How to take 2 great films and make 6 awful ones.',
+  },
+  { id: 16, category: 'dislikes', subcategory: 'music', title: 'Ed Sheeran', desc: 'And the quest for maximum algorithmic efficiency.' },
+  { id: 17, category: 'dislikes', subcategory: 'music', title: 'Opera', desc: 'But I DO like Gilbert & Sullivan.' },
+  { id: 18, category: 'dislikes', subcategory: 'music', title: 'Gabber', desc: 'But I gave it a go.' },
+  { id: 13, category: 'dislikes', subcategory: 'food', title: 'Pickled Things', desc: "Sort of. They're OK in very small doses." },
+  { id: 14, category: 'dislikes', subcategory: 'food', title: 'Truffle Stuff', desc: 'e.g. truffle pecorino, chips with truffle oil.' },
+  { id: 15, category: 'dislikes', subcategory: 'food', title: 'Kefir', desc: 'And associated soured things.' },
+];
+
+export default data;
