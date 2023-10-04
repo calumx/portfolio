@@ -33,15 +33,13 @@ export const DinnerParty = ({ menu, playlist, conversationTopics }) => {
     const goodPatter = ['Dogs', 'Munros', 'Work of David Lynch'];
 
     const goodAmbience = playlist.some(({ artist }) => goodMusic.includes(artist));
-    const menuQuality = menu.includes('Pickled Things') || m.includes('Truffle Oil') ? 'poor' : 'good';
-    const numberOfInterestingGuests = conversationTopics.filter(({ subject }) => {
-      return goodPatter.includes(subject)).length;
-    }
+    const menuQuality = menu.includes('Pickled Things') || menu.includes('Truffle Oil') ? 'poor' : 'good';
+    const numberOfInterestingGuests = conversationTopics.filter(({ subject }) => goodPatter.includes(subject)).length;
 
     if (goodAmbience && menuQuality === 'good' && numberOfInterestingGuests > 0) {
       return setMessageToHost('Great to be here!');
     } else return leaveInHuffImmediately();
-  }, []);
+  }, [playlist, menu, conversationTopics]);
 
   const leaveInHuffImmediately = () => {
     setMessageToHost('Sorry, I have to be going.');

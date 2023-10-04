@@ -47,7 +47,7 @@ export default TextProfile;
 
 const lists: { [key: string]: string[] } = {
   rad: [
-    'Guitars, drums synthesizers - the music of Carly Rae Jepsen, Judee Sill and Goblin',
+    'Guitars, drums, synthesizers - the music of Carly Rae Jepsen, Judee Sill and Goblin',
     'Come and See (1985), The Thing (1982), Mulholland Drive (2001), Possession (1981)',
     'Valdeón, caramel digestives, dead peaty whiskies',
   ],
